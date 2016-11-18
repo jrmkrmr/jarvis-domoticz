@@ -7,27 +7,25 @@
 # pg for PluGin
 # XX can be a two letters code for your plugin, ex: ww for Weather Wunderground
 jv_pg_dz_set_mode() {
-  local switch="Mode chauffage"
-  local ip="127.0.0.1:8080"
 
-  local idx=$(curl -s "http://$ip/json.htm?type=devices&filter=light" | jq -r --arg sw "$switch" '.result[] | select(.Name==$sw) | .idx')
+  local idx=$(curl -s "http://$jv_pg_dz_ip/json.htm?type=devices&filter=light" | jq -r --arg sw "$jv_pg_dz_inter_MC" '.result[] | select(.Name==$sw) | .idx')
 
   local command=""
   case $1 in
   "ECO")
-    command="Set%20Level&level=20"
+    command="Set%20Level&level=$jv_pg_dz_NC_eco"
     ;;
   "CONFORT")
-    command="Set%20Level&level=30"
+    command="Set%20Level&level=$jv_pg_dz_NC_confort"
     ;;
   "ARRET")
     command="Off"
     ;;
   "MANUEL")
-    command="Set%20Level&level=40"
+    command="Set%20Level&level=$jv_pg_dz_NC_manuel"
     ;;
   "AUTO")
-    command="Set%20Level&level=10"
+    command="Set%20Level&level=$jv_pg_dz_NC_auto"
     ;;
   esac
 
@@ -37,13 +35,13 @@ jv_pg_dz_set_mode() {
   else
     if [ -z "$idx" ]; then
       echo "$idx"
-      result="Je n'ai pas trouvé l'interrupteur $switch"
+      result="Je n'ai pas trouvé l'interrupteur $jv_pg_dz_inter_MC"
     else
       result="Le chauffage est maintenant en mode $1"
-      local url="http://$ip/json.htm?type=command&param=addlogmessage&message=JARVIS%20%3A%20Je%20passe%20le%20chauffage%20en%20mode%20$1"
+      local url="http://$jv_pg_dz_ip/json.htm?type=command&param=addlogmessage&message=JARVIS%20%3A%20Je%20passe%20le%20chauffage%20en%20mode%20$1"
       jv_curl $url
 
-      url="http://$ip/json.htm?type=command&param=switchlight&idx=$idx&switchcmd=$command"
+      url="http://$jv_pg_dz_ip/json.htm?type=command&param=switchlight&idx=$idx&switchcmd=$command"
       jv_curl $url
     fi
   fi
