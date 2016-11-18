@@ -1,0 +1,6 @@
+*CHAUFFAGE*ECO*==say "$(jv_pg_dz_set_mode "ECO")"
+*CHAUFFAGE*MANUEL*==say "$(jv_pg_dz_set_mode "MANUEL")"
+*CHAUFFAGE*CONFORT*==say "$(jv_pg_dz_set_mode "CONFORT")"
+*CHAUFFAGE*AUTO*==say "$(jv_pg_dz_set_mode "AUTO")"
+*COUPE*CHAUFFAGE*|*CHAUFFAGE*ARRET*|*ARRET*CHAUFFAGE*==say "$(jv_pg_dz_set_mode "ARRET")"
+*ALLUME*CHAUFFAGE*==say "$(jv_pg_dz_set_mode "AUTO")"

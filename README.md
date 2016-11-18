@@ -10,13 +10,13 @@ For multi-language plugin:
 - optionally write the Description / Usage sections in several languages
 -->
 ## Description
-Description of your Plugin
+Commande du chauffage dans domoticz
 
 ## Usage
 ```
-You: example of how to trigger the command
-Jarvis: output from Jarvis
+You: Coupe le chauffage
+Jarvis: Le chauffage est maintenant en mode ARRET
 ```
 
 ## Author
-[your name](http://your.website)
+[Jerome Kramer](https://github.com/jrmkrmr)
